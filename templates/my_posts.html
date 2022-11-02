@@ -1,0 +1,64 @@
+<!-- Extend Base Template -->
+{% extends "base.html" %} {% block title %}My Posts{% endblock %}
+
+<!-- My posts Block - To view the all posts of a logged in user -->
+{%block content%}
+
+    <!-- For Authenticated Users -->
+    {%if current_user.is_authenticated%}
+
+        <div class="top">
+            <div class="greeting">
+                <p>Welcome <a href="/my_posts">{{current_user.username}}</a></p>
+            </div>
+
+            <div class="addPost">
+                <a class="btn btn-primary btn-sm" href="/add_post/{{current_user.username}}">ADD POST</a>
+            </div>
+        </div>
+
+        <div class="allPosts">
+            <p>My Posts!</p>
+        </div>
+
+        <!-- Displaying available posts/articles -->
+        {% for post in posts%}
+
+
+            <div class="main-blog">
+
+                <hr class="big-hr">
+
+                <div class="title-block">
+                    <h4>{{post['title']}}</h4>
+
+                    {%if current_user.username == post.author%}
+                        <div class="edit">
+                            <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                    {%endif%}
+                </div>
+
+                <hr class="title-hr">
+
+                <div class="content-block">
+                    <p>{{post['content'][0:250]}}... <a href="/read/{{post.id}}" >Full Article</a></p>
+                </div>
+
+                <hr class="dot-hr">
+
+                <div class="post-details">
+                    <p>By ME <i class="fa-solid fa-face-smile"></i> on {{post['date'].strftime('%d/%b/%Y')}}</p>
+                </div>
+
+            </div>
+        
+
+        {%endfor%}
+    
+
+    {%endif%}
+
+
+
+{%endblock%}

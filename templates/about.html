@@ -1,0 +1,49 @@
+<!-- Extend Base Template -->
+{% extends "base.html" %} {% block title %}About{% endblock %}
+
+<!-- About Block -->
+{%block content%}
+
+    <!-- For Authenticated Users -->
+    {%if current_user.is_authenticated%}
+     
+        <div>
+            <h3>ABOUT</h3>
+        </div>
+
+        <div class="about-content">
+            <p>
+                AltBlog is a 2nd Semester Examination project by Igbinosa Christian for <a href="https://www.altschoolafrica.com/">AltSchool Africa.</a>
+                It is a safe space to share your opinion and read the opinions of others.
+                You are currently logged in and can create, edit and delete articles/posts(as widely used instead of article on this platform).
+                Access your posts <a href="/my_posts/{{current_user.username}}">NOW</a>
+                <h6>NOTE:</h6> Author = Your unique Username and post = article.
+            </p>
+        </div>
+    
+    <!-- For UnAuthenticated Users -->
+    {%else%}
+
+        <div>
+            <h3>ABOUT</h3>
+        </div>
+
+        <div class="about-content">
+            <p>
+                AltBlog is a 2nd Semester Examination project by Igbinosa Christian for <a href="https://www.altschoolafrica.com/">AltSchool Africa.</a>
+                It is a safe space to share your opinion and read the opinions of others.
+                You don't need an account to read articles/posts(as widely used instead of article on this platform)
+                but you need an account to create, edit and delete posts. Create an account here
+                <a href="/signup">SIGN UP</a> or <a href="/login">LOGIN</a> if you already have one.
+                <h6>NOTE:</h6> Author = User's unique Username and post = article.
+            </p>
+        </div>
+
+    
+
+    {%endif%}
+
+
+
+
+{%endblock%}

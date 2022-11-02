@@ -1,0 +1,45 @@
+<!-- Extend Base Template -->
+{% extends "base.html" %} {% block title %}Update/Delete{% endblock %}
+
+<!-- Update/Edit Post Block Authenticated Users Only -->
+{%block content%}
+
+    <!-- For Authenticated Users -->
+    {%if current_user.is_authenticated%}
+
+
+    <!-- To delete a post -->
+    <div>
+        <h3>EDIT/DELETE POST</h3>
+    </div>
+
+    <div class="container">
+        <div class="col-md-12 text-center">
+            <a href="/delete/{{post.id}}"><button class="btn btn-danger" value="UPDATE">DELETE</button></a>
+        </div>
+    </div>
+
+    <!-- To update/edit a post -->
+    <form action="/update/{{post.id}}/" method="POST">
+
+        <div class="input_container">
+            <label for="title">TITLE</label>
+            <input name="title" type="text" id="title" class="form-control" value="{{post.title}}" required>
+
+            <label for="content">CONTENT</label>
+            <textarea name="content" id="content" class="form-control" required>{{post.content}}</textarea>
+        </div>
+
+        <div class="container">
+            <div class="col-md-12 text-center">
+                <input id="submit" type="submit" class="btn btn-primary" value="UPDATE">
+            </div>
+        </div>
+
+    </form>
+
+    {%endif%}
+
+
+
+{%endblock%}

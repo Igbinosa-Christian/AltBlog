@@ -1,0 +1,37 @@
+<!-- Extend Base Template -->
+{% extends "base.html" %} {% block title %}Create Post{% endblock %}
+
+<!-- Add Post Block - To add/create a post for authenticated users only -->
+{%block content%}
+
+    <!-- For Authenticated Users -->
+    {%if current_user.is_authenticated%}
+
+        
+        <div>
+            <h3>CREATE POST</h3>
+        </div>
+
+        <form action="{{url_for('add_post', author='current_user.username')}}" method="POST">
+
+            <div class="input_container">
+                <label for="title">TITLE</label>
+                <input name="title" type="text" id="title" class="form-control" required>
+
+                <label for="content">CONTENT</label>
+                <textarea name="content" id="content" class="form-control" required></textarea>
+            </div>
+
+            <div class="container">
+                <div class="col-md-12 text-center">
+                    <input id="submit" type="submit" class="btn btn-primary" value="CREATE">
+                </div>
+            </div>
+
+        </form>
+
+    {%endif%}
+
+
+
+{%endblock%}

@@ -1,0 +1,57 @@
+<!-- Extend Base Template -->
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %}
+
+<!-- Signup Block -->
+{%block content%}
+
+    <div>
+        <h3>SIGN UP</h3>
+    </div>
+
+    <form action="{{url_for('signup')}}" method="POST">
+        <div class="row">
+          <div class="col">
+            <label for="first_name">First Name</label>
+            <input name="first_name" type="text" class="form-control" placeholder="First name" required>
+          </div>
+
+          <div class="col">
+            <label for="last_name">Last Name</label>
+            <input name="last_name" type="text" class="form-control" placeholder="Last name" required>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+              <label for="username">Username</label>
+              <input name="username" type="text" class="form-control" placeholder="Unique Username" required>
+            </div>
+  
+            <div class="col">
+              <label for="email">Email</label>
+              <input name="email" type="email" class="form-control" placeholder="Email" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="password">Password</label>
+              <input name="password" type="password" class="form-control" placeholder="Password" required>
+            </div>
+  
+            <div class="col">
+              <label for="con_password">Confirm password</label>
+              <input name="con_password" type="password" class="form-control" placeholder="Confirm Password" required>
+            </div>
+          </div>
+
+          <div class="container">
+              <div class="col-md-12 text-center">
+                <input id="submit" type="submit" class="btn btn-primary" value="SIGN UP">
+              </div>
+          </div>
+    </form>
+
+    <p class="form_q">Already have an account? <a href="/login">LOGIN NOW</a></p>
+
+{%endblock%}

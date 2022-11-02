@@ -1,0 +1,77 @@
+<!-- Extend Base Template -->
+{% extends "base.html" %} {% block title %}Complete Post{% endblock %}
+
+<!-- Read Block - Read a complete article/post -->
+{%block content%}
+
+    <!-- For Authenticated Users -->
+    {%if current_user.is_authenticated%}
+
+        <div class="main-blog">
+
+            <hr class="big-hr">
+
+            <div class="title-block">
+                <h4>{{post['title']}}</h4>
+
+                <!-- Add Edit button if logged in user owns the post/article -->
+                {%if current_user.username == post.author%}
+                    <div class="edit">
+                        <a href="/update/{{post.id}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </div>
+                {%endif%}
+            </div>
+
+            <hr class="title-hr">
+
+            <div class="content-block">
+                <p>{{post['content']}}</p>
+            </div>
+
+            <hr class="dot-hr">
+
+            <div class="post-details">
+
+                <!-- If logged in user owns the post/article -->
+                {%if current_user.username == post.author%}
+                    <p>By ME <i class="fa-solid fa-face-smile"></i> on {{post['date'].strftime('%d/%b/%Y')}}</p>
+
+                <!-- If logged in user does not own the post/article -->
+                {%else%}
+                    <p>By {{post['author']}} on {{post['date'].strftime('%d/%b/%Y')}}</p>
+                {%endif%}
+            </div>
+
+        </div>
+        
+
+    <!-- When User is unauthothenticated   -->
+    {%else%}
+
+        <div class="main-blog">
+
+            <hr class="big-hr">
+
+            <div class="title-block">
+                <h4>{{post['title']}}</h4>
+            </div>
+
+            <hr class="title-hr">
+
+            <div class="content-block">
+                <p>{{post['content']}}</p>
+            </div>
+
+            <hr class="dot-hr">
+
+            <div class="post-details">
+                <p>By {{post['author']}} on {{post['date'].strftime('%d/%b/%Y')}}</p>
+            </div>
+
+        </div>
+
+    {%endif%}
+
+
+
+{%endblock%}

@@ -1,0 +1,34 @@
+<!-- Extend Base Template -->
+{% extends "base.html" %} {% block title %}LOGIN{% endblock %}
+
+<!-- LOGIN Block -->
+{%block content%}
+
+    <div>
+        <h3>LOGIN</h3>
+    </div>
+
+    <form action="{{url_for('login')}}" method="POST">
+        <div class="row">
+          <div class="col">
+            <label for="username">Username</label>
+            <input name="username" type="text" class="form-control" placeholder="Username" required>
+          </div>
+
+          <div class="col">
+            <label for="password">Password</label>
+            <input name="password" type="password" class="form-control" placeholder="Password" required>
+          </div>
+        </div>
+
+        
+        <div class="container">
+            <div class="col-md-12 text-center">
+                <input id="submit" type="submit" class="btn btn-primary" value="LOGIN">
+            </div>
+        </div>
+    </form>
+
+    <p class="form_q">Don't have an account? <a href="/signup">SIGNUP NOW</a></p>
+
+{%endblock%}
