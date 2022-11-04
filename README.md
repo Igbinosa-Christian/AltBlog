@@ -69,3 +69,7 @@ Under [MIT](https://github.com/Igbinosa-Christian/AltBlog)
 - [Twitter](https://twitter.com/_m_anor)
 - Email igbinosa62@gmail.com
 - [Project Repository](https://github.com/Igbinosa-Christian/AltBlog)
+
+## SPECIAL
+- Post = Article
+- Author = Username(Unique Author Username)
