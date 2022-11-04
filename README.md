@@ -70,6 +70,6 @@ Under [MIT](https://github.com/Igbinosa-Christian/AltBlog)
 - Email igbinosa62@gmail.com
 - [Project Repository](https://github.com/Igbinosa-Christian/AltBlog)
 
-## SPECIAL
+## SPECIAL(Wordings that might be confusing in the project)
 - Post = Article
 - Author = Username(Unique Author Username)
