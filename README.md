@@ -8,9 +8,9 @@ AltBlog is an [AltSchool Africa](https://www.altschoolafrica.com/) 2nd Semester 
 - [HTML](https://html.com/)
 - [CSS](https://en.wikipedia.org/wiki/CSS)
 - [Bootstrap](https://getbootstrap.com/) - Nav. design and general responsiveness to an extent.
-- [Font Awesome](https://fontawesome.com/) - 'B' in AltBlog logo and edit icon
-- [VS CODE](https://code.visualstudio.com/) - Code Editor used for the project
-- [GIT](https://gitforwindows.org/) - Git Bash was used for Command Line
+- [Font Awesome](https://fontawesome.com/) - 'B' in AltBlog logo, search icon and edit icon.
+- [VS CODE](https://code.visualstudio.com/) - Code Editor used for the project.
+- [GIT](https://gitforwindows.org/) - Git Bash was used for Command Line.
 
 
 
