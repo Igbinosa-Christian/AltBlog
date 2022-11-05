@@ -72,4 +72,4 @@ Under [MIT](https://github.com/Igbinosa-Christian/AltBlog)
 
 ## SPECIAL(Wordings that might be confusing in the project)
 - Post = Article
-- Author = Username(Unique Author Username)
+- Author = Username(Unique User Username)
