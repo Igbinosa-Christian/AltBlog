@@ -43,7 +43,7 @@
                     <!-- Add Edit button if logged in user owns the post/article -->
                     {%if current_user.username == post.author%}
                         <div class="edit">
-                            <a href="/update/{{post.id}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="/update/{{post.id}}/"><i class="fa-solid fa-pen-to-square"></i></a>
                         </div>
                     {%endif%}
                 </div>
@@ -66,6 +66,18 @@
                     {%else%}
                         <p>By {{post['author']}} on {{post['date'].strftime('%d/%b/%Y')}}</p>
                     {%endif%}
+
+                    <!-- Save Post -->
+                    <form action="/save_post/{{post.id}}" method="POST" class="save_form">
+        
+                        <div>
+                            <div>
+                                <input id="submit" type="submit" class="btn btn-primary" value="Save Post">
+                            </div>
+                        </div>
+        
+                    </form>
+                    
                 </div>
 
             </div>
