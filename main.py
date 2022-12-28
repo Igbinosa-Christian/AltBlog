@@ -10,21 +10,27 @@ from datetime import datetime
 # Defining base dir. of main.py
 base_dir=os.path.dirname(os.path.realpath(__file__))
 
-# Create an instance of sqlalchemy
-db=SQLAlchemy()
-
 
 # Create a flask instance
 app=Flask(__name__)
 
 
 # Database Configurations
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(base_dir, 'blog.db')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///' + \
+    os.path.join(base_dir, 'blog.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY']='d264032a74d1555a05942698'
+
+# Create an instance of sqlalchemy
+db=SQLAlchemy(app)
+
 
 # Initialize the app database
 db.init_app(app)
+
+
+#LoginManager Instance
+login_manager=LoginManager(app) 
 
 
 # User Model
@@ -35,6 +41,24 @@ class User(db.Model,UserMixin):
     username=db.Column(db.String(150),unique=True,nullable=False)
     email=db.Column(db.String(200),unique=True,nullable=False)
     password_hash=db.Column(db.Text(),nullable=False)
+    
+
+    def __repr__(self):
+        return f"User {self.username}"
+
+
+
+# SavedPosts Model
+class SavedPosts(db.Model):
+    id=db.Column(db.Integer(),primary_key=True)
+    post_id=db.Column(db.Integer(), nullable=False)
+    username = db.Column(db.String(150),nullable=False)
+    author = db.Column(db.String(150),nullable=False)
+    title = db.Column(db.String(255),nullable=False)
+    content = db.Column(db.String(),nullable=False)
+    date = db.Column(db.DateTime(), nullable=False, default = datetime.now())
+
+    
 
     def __repr__(self):
         return f"User {self.username}"
@@ -65,10 +89,13 @@ class Message(db.Model):
         return f"Post {self.name}"
 
 
+# Initialize db tables on first run
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
-#LoginManager Instance
-login_manager=LoginManager(app) 
-login_manager.login_view='login'
+
+# login_manager.login_view='login'
 
 
 
@@ -217,6 +244,75 @@ def add_post(author):
 
 
 
+# Route to save post
+@app.route('/save_post/<int:id>', methods=['GET','POST'])
+@login_required
+def save_post(id):
+
+    post_to_save = Post.query.get_or_404(id)
+
+    if request.method == 'POST':
+        username = current_user.username
+        post_id = post_to_save.id
+        author =post_to_save.author
+        title = post_to_save.title
+        content = post_to_save.content
+        date = post_to_save.date
+
+        if_already_saved = SavedPosts.query.filter_by(post_id=post_id, username=username).first()
+
+        if if_already_saved:
+            flash("Already saved", category='error')
+        else:
+            save_post = SavedPosts(
+                post_id=post_id, username=username, author=author, title=title, content=content, date=date
+            )
+
+            db.session.add(save_post)
+            db.session.commit()
+
+            flash("Post saved", category='success')
+
+        
+
+    return redirect(url_for('index'))
+
+    
+
+# Route to view your(user) saved posts
+@app.route('/saved_posts/<string:username>')
+@login_required
+def saved_posts(username):
+    username = current_user.username
+
+    posts = SavedPosts.query.filter_by(username=username).all()
+    
+    return render_template('saved_posts.html', posts=posts)
+
+
+
+
+# Route to delete saved post
+@login_required
+@app.route('/delete_saved/<int:id>/', methods=['GET', 'POST'])
+def delete_saved(id):
+    post_to_delete=SavedPosts.query.get_or_404(id)
+    
+    # To confirm that current user owns the saved post list
+    if current_user.username == post_to_delete.username:
+
+        db.session.delete(post_to_delete)
+        db.session.commit()    
+
+        flash("POST DELETED", category='error')
+        return redirect(url_for('index'))
+
+    else:
+        flash("CANNOT DELETE ANOTHER USER'S SAVED POST", category='error') 
+        return redirect(url_for('index'))
+
+
+
 # Route to view all your(user) posts
 @app.route('/my_posts/<string:author>')
 @login_required
@@ -312,3 +408,21 @@ def logout():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
+
+# Changed database to Initialize db tables on first run instead of always going to the terminal with(92 to 95):
+# @app.before_first_request
+# def create_tables():
+#     db.create_all()
+
+# Created a route to save posts to read later, view saved posts and 
+# delete saved posts from page 242 to 315 after creating saved posts model 51 to 62
+# Created a saved_posts.html to communicate with saved posts
+
+# Fixed post button in my_posts.html
+
+# Fixed footer to remain at bottom of the page
