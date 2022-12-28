@@ -129,10 +129,18 @@ textarea{
     height: 230px;
 }
 
-footer{
-    margin-top: 30px;
+.save_form{
+    text-align: right;
+    margin-top: -40px;
 }
 
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+}
+  
  @media only screen and (max-width: 950px) {
     #signup, #logout, #login, #posts{
         margin-left: 0px;
