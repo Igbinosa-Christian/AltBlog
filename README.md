@@ -26,6 +26,7 @@ AltBlog is an [AltSchool Africa](https://www.altschoolafrica.com/) 2nd Semester 
 - Read all posts/articles.
 - Create, edit and delete posts created by self(current authenticated user).
 - View all posts/articles created by the self(current authenticated user).
+- Save posts/articles to read later and can remove saved posts from saved list.
 - Search for a post/article by author name.
 - Leave feedback for development team via Contact Us.
 - Login and Logout.
@@ -70,6 +71,3 @@ Under [MIT](https://github.com/Igbinosa-Christian/AltBlog)
 - Email igbinosa62@gmail.com
 - [Project Repository](https://github.com/Igbinosa-Christian/AltBlog)
 
-## SPECIAL(Wordings that might be confusing in the project)
-- Post = Article
-- Author = Username(Unique User Username)
