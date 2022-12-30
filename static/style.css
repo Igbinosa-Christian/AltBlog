@@ -1,3 +1,9 @@
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .logo{
     text-align: center;
     font-size: 20px;
@@ -135,10 +141,8 @@ textarea{
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-
+    margin-top: auto;
+    font-size: smaller;
 }
   
  @media only screen and (max-width: 950px) {
